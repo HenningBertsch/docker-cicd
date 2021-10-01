@@ -1,0 +1,6 @@
+# action.yml
+name: 'docker-cicd'
+description: 'Container action tests'
+runs:
+  using: 'docker'
+  image: 'docker-cicd.dockerfile'
