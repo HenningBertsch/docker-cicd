@@ -13,6 +13,7 @@ RUN pip3 install -U pip
 WORKDIR /src
 # Copy all contents of the current folder
 ADD src/ ./
+ADD pythonRequirements.txt ./
 
 RUN pip install --no-cache-dir -r pythonRequirements.txt
 
