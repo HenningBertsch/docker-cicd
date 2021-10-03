@@ -9,14 +9,30 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v2
-      - name: Push to GitHub
-        uses: docker/build-push-action@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
         with:
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GIT_HUB_CR_KEY }}
-          registry: ghcr.io
-          repository: henningbertsch/docker-cicd
-          tags: latest
-          dockerfile: Dockerfile
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build & Push
+        run: |
+          docker build . --file Dockerfile --tag ${{ github.actor }}/docker-cicd:latest
+          docker push ${{ github.actor }}/docker-cicd:latest 
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Check out the repo
+#         uses: actions/checkout@v2
+#       - name: Push to GitHub
+#         uses: docker/build-push-action@v2
+#         with:
+#           username: ${{ github.actor }}
+#           password: ${{ secrets.GIT_HUB_CR_KEY }}
+#           registry: ghcr.io
+#           repository: henningbertsch/docker-cicd
+#           tags: latest
+#           dockerfile: Dockerfile
