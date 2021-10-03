@@ -1,4 +1,4 @@
- name: Publish Docker image to DockerHub container registry
+name: Publish Docker image to DockerHub container registry
 
 # Executes every time something is pushed to the main branch
 # which in this case is the 'master'
