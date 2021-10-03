@@ -1,7 +1,7 @@
 name: Publish Docker image to DockerHub container registry
 
 # Executes every time something is pushed to the main branch
-# wich in this case is the 'master'
+# which in this case is the 'master'
 on:
   push:
     branches: [ main ]    
@@ -21,7 +21,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USR }}
           password: ${{ secrets.DOCKER_HUB_KEY }}
           registry: docker.io
-          repository: ${{ secrets.DOCKER_HUB_USR }}/docker-cicd
+          repository: hbertsch/docker-cicd
           tags: latest
           dockerfile: Dockerfile  
 
