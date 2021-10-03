@@ -1,7 +1,8 @@
 name: Publish Docker image to GitHub container registry
-
 # Executes every time something is pushed to the main branch
 # which in this case is the 'master'
+# WARNING: if your DockerHub or GitHub user name contains capital letters
+# the image push will fail, since only lower letters are allowed!
 on:
   push:
     branches: [ main ]    
@@ -21,18 +22,3 @@ jobs:
         run: |
           docker build . --file Dockerfile --tag ${{ github.actor }}/docker-cicd:latest
           docker push ${{ github.actor }}/docker-cicd:latest 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Check out the repo
-#         uses: actions/checkout@v2
-#       - name: Push to GitHub
-#         uses: docker/build-push-action@v2
-#         with:
-#           username: ${{ github.actor }}
-#           password: ${{ secrets.GIT_HUB_CR_KEY }}
-#           registry: ghcr.io
-#           repository: henningbertsch/docker-cicd
-#           tags: latest
-#           dockerfile: Dockerfile

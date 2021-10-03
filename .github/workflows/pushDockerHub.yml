@@ -1,7 +1,8 @@
 name: Publish Docker image to DockerHub container registry
-
 # Executes every time something is pushed to the main branch
 # which in this case is the 'master'
+# WARNING: if your DockerHub or GitHub user name contains capital letters
+# the image push will fail, since only lower letters are allowed!
 on:
   push:
     branches: [ main ]    
