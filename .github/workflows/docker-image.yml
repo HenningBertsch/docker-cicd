@@ -15,4 +15,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file docker-cicd.dockerfile --tag docker-cicd:latest
     - name: Push Docker image
-      run: docker push ghcr.io/HenningBertsch/docker-cicd:latest
+      run: docker push ghcr.io/henningbertsch/docker-cicd:latest
