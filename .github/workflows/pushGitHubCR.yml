@@ -1,10 +1,12 @@
 name: Publish Docker image to GitHub container registry
+
+# Executes every time something is pushed to the main branch
+# which in this case is the 'master'
 on:
   push:
-    branches: main
+    branches: [ main ]    
 jobs:
-  push_to_registry:
-    name: Push Docker image to GitHub Container Registry
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
