@@ -1,4 +1,4 @@
-name: Publish Docker image to DockerHub container registry
+ name: Publish Docker image to DockerHub container registry
 
 # Executes every time something is pushed to the main branch
 # which in this case is the 'master'
@@ -9,15 +9,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Push to DockerHub Packages
+        uses: docker/build-push-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USR }}
           password: ${{ secrets.DOCKER_HUB_KEY }}
+          registry: docker.io
+          repository: hbertsch/docker-cicd
+          tags: latest
+          dockerfile: Dockerfile
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Login to Docker Hub
+#         uses: docker/login-action@v1
+#         with:
+#           username: ${{ secrets.DOCKER_HUB_USR }}
+#           password: ${{ secrets.DOCKER_HUB_KEY }}
       
-      - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ${{ secrets.DOCKER_HUB_USR }}/docker-cicd:latest
+#       - name: Build and push
+#         id: docker_build
+#         uses: docker/build-push-action@v2
+#         with:
+#           push: true
+#           tags: ${{ secrets.DOCKER_HUB_USR }}/docker-cicd:latest
