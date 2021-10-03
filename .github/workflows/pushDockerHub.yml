@@ -6,49 +6,43 @@ on:
   push:
     branches: [ main ]    
 
-jobs:
-  push_to_registry:
-    name: Push Docker image to DockerHub Container Registry
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v2
-      - name: Check tag name
-        run: echo ${{ secrets.DOCKER_HUB_USR }}/docker-cicd
-      - name: Push to DockerHub
-        uses: docker/build-push-action@v2
-        with:
-          username: ${{ secrets.DOCKER_HUB_USR }}
-          password: ${{ secrets.DOCKER_HUB_KEY }}
-          registry: docker.io
-          repository: hbertsch/docker-cicd
-          tags: latest
-          dockerfile: Dockerfile  
-
 # jobs:
-#   build:
+#   push_to_registry:
+#     name: Push Docker image to DockerHub Container Registry
 #     runs-on: ubuntu-latest
-#     # Login into docker hub with secrets stored in the GitHub
-#     # project settings. API key can be obtained from DockerHub
 #     steps:
-#       - name: Login to Docker Hub
-#         uses: docker/login-action@v1
+#       - name: Check out the repo
+#         uses: actions/checkout@v2
+#       - name: Push to DockerHub
+#         uses: docker/build-push-action@v2
 #         with:
 #           username: ${{ secrets.DOCKER_HUB_USR }}
 #           password: ${{ secrets.DOCKER_HUB_KEY }}
-      
-#       # Sets up the build environment for docker
-#       - name: Set up Docker Buildx
-#         id: buildx
-#         uses: docker/setup-buildx-action@v1
+#           registry: docker.io
+#           repository: hbertsch/docker-cicd
+#           tags: latest
+#           dockerfile: Dockerfile  
 
-#       - name: Build and push
-#         id: docker_build
-#         uses: docker/build-push-action@v2
-#         with:
-#           push: true
-#           tags: ${{ secrets.DOCKER_HUB_USR }}/docker-cicd:latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Login into docker hub with secrets stored in the GitHub
+    # project settings. API key can be obtained from DockerHub
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USR }}
+          password: ${{ secrets.DOCKER_HUB_KEY }}
       
-#       # Prints the SHA256 in the build logs of GitHUB
-#       - name: Image digest
-#         run: echo ${{ steps.docker_build.outputs.digest }}
+      # Sets up the build environment for docker
+      # - name: Set up Docker Buildx
+      #   id: buildx
+      #   uses: docker/setup-buildx-action@v1
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USR }}/docker-cicd:latest
