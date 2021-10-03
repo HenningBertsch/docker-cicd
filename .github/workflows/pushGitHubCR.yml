@@ -20,5 +20,5 @@ jobs:
         uses: actions/checkout@v2
       - name: Build & Push
         run: |
-          docker build . --file Dockerfile --tag ${{ github.actor }}/docker-cicd:latest
+          docker build . --file Dockerfile --tag ghcr.io/${{ github.actor }}/docker-cicd:latest
           docker push ghcr.io/${{ github.actor }}/docker-cicd:latest 
