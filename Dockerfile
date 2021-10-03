@@ -7,14 +7,14 @@ RUN apk add build-base
 RUN apk add python3-dev
 RUN python3 -m ensurepip --upgrade
 RUN pip3 install -U pip
-RUN pip3 install requests
+# RUN pip3 install requests
 
 # Define the container work dir
 WORKDIR /src
 # Copy all contents of the current folder
 ADD src/ ./
 
-# RUN pip install --no-cache-dir -r pythonRequirements.txt
+RUN pip install --no-cache-dir -r pythonRequirements.txt
 
 # Run command for example inside container
 CMD python3 run.py
