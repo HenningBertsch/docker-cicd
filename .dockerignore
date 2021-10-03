@@ -1,1 +1,3 @@
 docker-cicd.dockerfile
+.github/
+.dockerignore
