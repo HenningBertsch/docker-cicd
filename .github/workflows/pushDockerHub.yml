@@ -13,6 +13,7 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
+      - name: Check tag name
         run: echo ${{ secrets.DOCKER_HUB_USR }}/docker-cicd
       - name: Push to DockerHub
         uses: docker/build-push-action@v2
