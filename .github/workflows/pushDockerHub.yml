@@ -1,20 +1,25 @@
-name: CI to Docker Hub
+name: Publish Docker image to DockerHub container registry
 
+# Executes every time something is pushed to the main branch
+# wich in this case is the 'master'
 on:
   push:
     branches: [ main ]    
 
+  
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    # Login into docker hub with secrets stored in the GitHub
+    # project settings. API key can be obtained from DockerHub
     steps:
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_HUB_USR }}
           password: ${{ secrets.DOCKER_HUB_KEY }}
-
+      
+      # Sets up the build environment for docker
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
@@ -25,6 +30,7 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USR }}/docker-cicd:latest
-
+      
+      # Prints the SHA256 in the build logs of GitHUB
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
