@@ -15,7 +15,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USR }}
           password: ${{ secrets.DOCKER_HUB_KEY }}
       - name: Build
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         run: |
           docker build . --file Dockerfile --tag hbertsch/docker-cicd:latest
           docker push hbertsch/docker-cicd:latest 
