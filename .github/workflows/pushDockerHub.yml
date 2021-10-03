@@ -17,7 +17,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USR }}
           password: ${{ secrets.DOCKER_HUB_KEY }}
           registry: docker.io
-          repository: hbertsch/docker-cicd
+          repository: docker-cicd
           tags: latest
           dockerfile: Dockerfile
 
