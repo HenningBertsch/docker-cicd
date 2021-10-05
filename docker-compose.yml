@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  python:
+    # If you want DockerCompose to build from a 'Dockerfile' use:
+    build: .
+    # If you want DockerCompose to use an image hosted on DockerHub use:
+    #image: hbertsch/docker-cicd:latest
+    volumes:
+      - my-storage:/storage
+volumes:
+  my-storage:
+    # The external flag prevents DockerCompose to append the project
+    # prefix to the volume name and creates a volume called 'my-storage'
+    external: true
