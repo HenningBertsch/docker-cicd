@@ -2,7 +2,9 @@
 Repo for some personal docker tests for automating some stuff.
 
 ## Workflows
-Currently containing two workflows to build and push a docker image to `ghcr` and `DockerHub`. The images can be pulled from here:
+Currently containing two workflows to build and push a docker image to `ghcr` and `DockerHub` every time a new tags created and pushed (e.g. by using `git tag ...` & `git push --follow-tags`)
+
+The images can be pulled from here:
 
 ### GitHub Container Registr (`ghcr`)
 
