@@ -5,11 +5,11 @@ name: Publish Docker image to GitHub container registry
 on:
   push:
     tags:
-      - '*'
+      - '**'
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
+    steps:git 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
